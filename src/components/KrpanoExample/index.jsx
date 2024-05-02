@@ -5,8 +5,8 @@ import styled, { keyframes } from 'styled-components'
 import useObtenerLotes from '../../hooks/useObtenerLotes'
 import convertirAMoneda from '../../functions/convertirAMoneda'
 const KrpanoContainer = styled.div`
-    width:100vw;
-    height:100vh;
+    width:100%;
+    height:100%;
     position:relative;
 `
 const slideIn = keyframes`
@@ -124,7 +124,7 @@ const KrpanoExample = () => {
 
     return(
         <KrpanoContainer>
-            <div ref={containerRef} style={{position:'absolute'}}/>
+            <div ref={containerRef}/>
             {visibleFicha && <Ficha dataLote={loteFiltrado} visibleFicha={visibleFicha} setVisibleFicha={setVisibleFicha}/> }
             
         </KrpanoContainer>   
