@@ -1,20 +1,52 @@
 import { useState } from 'react'
-import { Helmet } from 'react-helmet'
 import { useNavigate } from 'react-router-dom'
-import { Header, Titulo, ContenedorHeader } from '../../elements/Header'
 import Boton from '../../elements/Boton'
-import { Formulario, Input, ContenedorBoton } from '../../elements/ElementosDeFormulario'
 import SvgLogin from '../../assets/imagenes/login.svg?react'
 import styled from 'styled-components'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/firebaseConfig'
 import Alerta from '../Alerta'
+import theme from '../../constants/theme';
 
 const Svg = styled(SvgLogin)`
     width:100%;
     max-height:12.5rem;
     margin-bottom:1.25rem;
 `
+const Formulario = styled.form`
+    grid-area:content;
+    background:gray;
+    width:100%;
+    height:520px;
+    max-width:420px;
+    justify-self:center;
+    align-self:center;
+    border-radius:5px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center
+`;
+const ContenedorBoton = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 2.5rem 0;  /* 40px */
+`;
+export const Input = styled.input`
+    background: ${theme.grisClaro};
+    cursor: pointer;
+    margin: 0.25rem 0;
+    border-radius: 0.25rem;
+    border:none;
+    height: 2.25rem; 
+    width: 90%;
+    padding: 0 1.25rem; 
+    font-size: 1rem; 
+    transition: .5s ease all;
+    &:hover {
+        background: ${theme.grisClaro2};
+    }
+`;
 const INITIAL_STATE_ALERTA = {
     active: false, tipo:'', mensaje:'' 
 }
@@ -66,19 +98,6 @@ const SignIn = () => {
     const { email, password } = data 
     return(
         <>
-            <Helmet>
-                <title>Iniciar Sesion</title>
-            </Helmet>
-            <Header>
-                <ContenedorHeader>
-                    <Titulo>Iniciar Sesion</Titulo>
-                    {/* <div>
-                        <Boton to="/signup">
-                            Registrarse
-                        </Boton>
-                    </div> */}
-                </ContenedorHeader>
-            </Header>
             <Formulario onSubmit={handleOnSubmit}>
                 <Svg/>
                 <Input 

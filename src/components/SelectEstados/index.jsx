@@ -7,11 +7,11 @@ import IconoDown from './../../assets/imagenes/down.svg?react'
 const ContenedorSelect = styled.div`
     background: ${theme.grisClaro};
     cursor: pointer;
-    margin:0.5rem;
+    
     border-radius: 0.25rem; 
     position:relative;
-    height: 2.25rem; 
-    width: 30%;
+    height: 100%; 
+    min-width:120px;
     padding: 0px 1.25rem; /* 20px */
     font-size: 1rem; 
     text-align: center;
@@ -25,7 +25,7 @@ const ContenedorSelect = styled.div`
  
 const OpcionSeleccionada = styled.div`
     width: 100%;
-    text-transform: uppercase;
+    text-transform: capitalize;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,7 +39,7 @@ const OpcionSeleccionada = styled.div`
 const Opciones = styled.div`
     background: ${theme.grisClaro};
     position: absolute;
-    top: 2.75rem;
+    top: 2.5rem;
     z-index:100;
     left: 0;
     width: 100%;
@@ -49,7 +49,7 @@ const Opciones = styled.div`
 `;
  
 const Opcion = styled.div`
-    padding: 1.25rem; /* 20px */
+    padding: 0.6rem 1.25rem; /* 20px */
     display: flex;
     svg {
         width: 28px;

@@ -6,7 +6,6 @@
    	<include url="skin/hotspots-actions.xml" />
     <include url="skin/spots.xml" />
     <include url="skin/ficha.xml" />
-    <include url="skin/mapa.xml" />
 	<include url="skin/vtourskin_design_117.xml" />
    <!-- <include url="../krpano/plugins/googleanalytics.xml"/> -->
 

@@ -1,5 +1,4 @@
-import { Helmet } from "react-helmet"
-import { Header, Titulo } from "../../elements/Header"
+import { Header } from "../../elements/Header"
 import BtnRegresar from "../../elements/BtnRegresar"
 
 import FormularioLote from '../FormularioLote'
@@ -11,14 +10,8 @@ const EditarLote = () => {
     const [lote] = useObtenerLote(id)
     return(
         <>
-            <Helmet>
-                Editar lote
-            </Helmet>
             <Header>
-                <BtnRegresar ruta="/lista-de-lotes"/>
-                <Titulo>
-                    Editar lote 
-                </Titulo>    
+                <BtnRegresar ruta="/lista-de-lotes"/>    
             </Header>
             <FormularioLote lote={lote}/>
         </>  

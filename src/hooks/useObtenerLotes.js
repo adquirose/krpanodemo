@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { db } from "../firebase/firebaseConfig"
 import { query, collection, onSnapshot } from "firebase/firestore"
 
-const useObtenerLotes = () =>{
+const useObtenerLotes = () => {
     const [lotes, setLotes] = useState([])
 
     useEffect(() => {

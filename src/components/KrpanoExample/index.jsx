@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react'
 import useKrpano from 'react-krpano-hooks'
 import styled, { keyframes } from 'styled-components'
 import useObtenerLotes from '../../hooks/useObtenerLotes'
-import convertirAMoneda from '../../functions/convertirAMoneda'
+
 const KrpanoContainer = styled.div`
     width:100%;
     height:100%;
     position:relative;
+    grid-row: 1/-1;
+    grid-column: 1/-1;
 `
 const slideIn = keyframes`
     0% {
@@ -43,14 +45,16 @@ const FichaContainer = styled.div`
     top:150px;
     padding:2rem;
     left:20px;
-    animation:${slideIn} 1s;    
+    animation:${slideIn} 1s;
+    position:absolute;
 `
 const Button = styled.button`
     border:none;
     padding:0.85rem 2rem;
     border-radius:5px;
     background:#5B69E2;
-    color:white
+    color:white;
+    cursor:pointer;
 `
 const ButtonGroup = styled.div`
     position:absolute;
@@ -69,12 +73,11 @@ const P = styled.p`
 // eslint-disable-next-line react/prop-types
 
 const Ficha = ({dataLote = {}, setVisibleFicha, visibleFicha}) => {
-    console.log(dataLote)
     return(
         <FichaContainer $visibleFicha={visibleFicha}>
             <Titulo>Lote {dataLote.nombreLote}</Titulo>
             <P>Estado: {dataLote.estado}</P>
-            <P>Valor: {convertirAMoneda(dataLote.valor)}</P>
+            <P>Valor: {dataLote.precio}</P>
             <ButtonGroup>
                 <Button type="Button" onClick={() => setVisibleFicha(!visibleFicha)}>Cerrar</Button>
             </ButtonGroup> 
@@ -88,22 +91,23 @@ const KrpanoExample = () => {
     const [nombreSpotFicha, setNombreSpotFicha] = useState('')
     const [nombreEscena, setNombreEscena] = useState('')
     const [loteFiltrado, setLoteFiltrado] = useState({})
+
     const { 
         containerRef,
         callKrpano 
     } = useKrpano({ 
-        height:'100%', 
-        width:'100%',
-        globalFunctions:{
-            mostrarFicha: (nombreSpot) => {
-                console.log(nombreSpot)
-                setNombreSpotFicha(nombreSpot) 
-                setVisibleFicha(true)
-            },
-            nameScene: (escena) => {
-                setNombreEscena(escena)
+            height:'100%', 
+            width:'100%',
+            globalFunctions:{
+                mostrarFicha: (nombreHs) => {
+                    console.log(nombreHs)
+                    setNombreSpotFicha(nombreHs) 
+                    setVisibleFicha(true)
+                },
+                nameScene: (escena) => {
+                    setNombreEscena(escena)
+                }
             }
-        }
     })
 
     useEffect(() => {
@@ -118,15 +122,15 @@ const KrpanoExample = () => {
     },[callKrpano, lotes, nombreEscena])
 
     useEffect(()=> {
-        const filtroLote = (nombreSpot) => lotes.find((lote) => lote.nombreSpot === nombreSpot)
+        const filtroLote = (nombreHs) => lotes.find((lote) => lote.nombreSpot === nombreHs) 
         setLoteFiltrado(filtroLote(nombreSpotFicha))
+       
     },[nombreSpotFicha, lotes])
 
     return(
         <KrpanoContainer>
             <div ref={containerRef}/>
-            {visibleFicha && <Ficha dataLote={loteFiltrado} visibleFicha={visibleFicha} setVisibleFicha={setVisibleFicha}/> }
-            
+            {visibleFicha && <Ficha dataLote={loteFiltrado} visibleFicha={visibleFicha} setVisibleFicha={setVisibleFicha}/> } 
         </KrpanoContainer>   
     )
 }
