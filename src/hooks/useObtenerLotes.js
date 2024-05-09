@@ -11,6 +11,7 @@ const useObtenerLotes = () => {
         )
         const unsuscribe = onSnapshot(consulta,(snapshot) => {
             setLotes(snapshot.docs.map((lote) => {
+                console.log('peticion lotes!')
                 return { ...lote.data(), id: lote.id }
             }))
         })
